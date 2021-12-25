@@ -1,0 +1,55 @@
+{% extends 'standard/main_page.html' %}
+{% load static %}
+
+{% block title %}
+  <title>Home | @ABblogs</title>
+{% endblock title %}
+
+{% block cssfiles %}
+  <link rel="stylesheet" href="{% static 'css/landing_page.css' %}">
+{% endblock cssfiles %}
+
+{% block content %}
+
+<!-- main content -->
+
+  <div class="main-content">
+    <div class="content-box">
+          <div class="main-row">
+              <h1>Publish your passions <br>in your way</h1>
+          </div>
+          <div class="main-row">
+              <p>Create and read blogs for free</p>
+          </div>
+          <a href="{% url 'create-blog' %}" type="button" class="button">Create Blog</a>
+          
+        
+    </div>
+    <div class="bubbles">
+      <img src="{% static 'images/bubble.png' %}">
+      <img src="{% static 'images/bubble.png' %}">
+      <img src="{% static 'images/bubble.png' %}">
+      <img src="{% static 'images/bubble.png' %}">
+      <img src="{% static 'images/bubble.png' %}">
+      <img src="{% static 'images/bubble.png' %}">
+      <img src="{% static 'images/bubble.png' %}">
+    </div>
+  </div>
+
+ <!-- read section -->
+
+  <div class="readsection">
+    <div class="content-box">
+        <div class="main-row">
+            <h1>The revolution is not an apple that falls when ripe. You have to make it fall.</h1>
+        </div>
+        <div class="read-row">
+            <p>― Che Guevara</p>
+        </div>
+        <a href="{% url 'homepage' %}"><button type="button" class="button">Read Blog</button></a> 
+    </div>
+  </div>  
+
+  {% include 'standard/footer.html' %}
+
+{% endblock content %}

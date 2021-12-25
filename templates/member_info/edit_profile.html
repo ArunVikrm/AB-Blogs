@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Profile-ABblogs</title>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,200&display=swap" rel="stylesheet">
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="{% static 'css/profile_page.css' %}">
+    </head>
+    <body>
+        <div class="usercontent">
+            <div class="profiledata">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="profile-card">
+                        <div class="pdetail">
+                            <div class="heading">Profile
+                            </div>
+                            <label for="uname">Username</label>
+                            <input type="text" name="username" id="uname" value={{form.initial.username}}>
+                            <label for="mail">Email</label>
+                            <input type="email" name="email" id="mail" value={{form.initial.email}}>
+                            <!-- <label for="about">About</label>
+                            <textarea name="" id="about" cols="30" rows="10"></textarea> -->
+                        </div>
+                
+                        <!-- <button id="followbtn" type="submit">Save changes</button> -->
+                    </div>
+                
+                    
+                    <div class="profile-card">
+                        <div class="profile-pic">
+                            <img src="{{form.initial.profile_image.url}}" alt="" id="photo">
+                            <input type="file" id="pic" name="profile_image">
+                            <label for="pic" id="uploadbtn">Change dp</label>
+                        </div>
+                        <button id="followbtn" type="submit">Save changes</button>
+                    </div>
+                </form>
+                <div class="profile-card deletion">
+                    <div class="heading">Account Deletion :(
+                    </div>
+                    <label for="delete">Are you sure that you want to delete this account?</label>
+                    <p>Type <em>' CONFIRM '</em> to delete</p>
+                    <input type="text" id="delete">
+                    <button id="followbtn">Delete <span><i class="fa fa-exclamation-triangle"></i></span></button>
+                </div>
+            </div>
+            
+          
+        
+            <div class="sidebar">
+                <div class="logocontent">
+                    <div class="logo">
+         
+                        <div class="logoname">Jack Sparrow</div>
+                    </div>
+                    <i class='bx bx-menu-alt-left' id="sidebtn"></i>
+                </div>
+                
+                <ul class="sidelist">
+                    <li>
+                        <a href="mainpage.html">
+                            <i class='bx bxs-home'></i>
+                            <span class="listname">Home</span>
+                        </a>
+                       <span class="tooltip">Home</span> 
+                    </li>
+                    <li>
+                        <a href="userpage.html" id="dash">
+                            <i class='bx bx-grid-alt'></i>
+                            <span class="listname">Dashboard</span>
+                        </a>
+                       <span class="tooltip">Dashboard</span> 
+                    </li>
+                    <li>
+                        <a href="profile.html" id="prof">
+                            <i class='bx bx-user'></i>
+                            <span class="listname">Profile</span>
+                        </a>
+                        <span class="tooltip">Profile</span> 
+                    </li>
+                   
+                    <li>
+                        <a href="#">
+                            <i class='bx bx-bookmark'></i>
+                            <span class="listname">Saved Blogs</span>
+                        </a>
+                       <span class="tooltip">Saved Blogs</span> 
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bx-log-out'></i>
+                            <span class="listname">Log out</span>
+                        </a>
+                       <span class="tooltip">Log out</span> 
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+        <script>
+            
+          // new nav bar 
+            var sbtn = document.querySelector('#sidebtn');
+            var sbar = document.querySelector('.sidebar');
+            sbtn.onclick = function(){
+                sbar.classList.toggle('active');
+            }
+            
+
+                //profile pic upload
+
+
+            const imgDiv = document.querySelector('.profile-pic');
+            const img = document.querySelector('#photo');
+            const file = document.querySelector('#pic');
+            const uploadBtn = document.querySelector('#uploadbtn');
+
+
+
+
+
+
+            file.addEventListener('change', function(){
+                
+                const choosedFile = this.files[0];
+
+                if (choosedFile) {
+
+                    const reader = new FileReader(); 
+
+                    reader.addEventListener('load', function(){
+                        img.setAttribute('src', reader.result);
+                    });
+
+                    reader.readAsDataURL(choosedFile);
+
+                }
+            });
+
+  
+            </script>
+    </body>
+</html>

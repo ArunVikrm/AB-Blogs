@@ -1,0 +1,70 @@
+{% extends 'standard/main_page.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Type | ReadBlogs @ABblogs</title>
+{% endblock title %}
+
+{% block cssfiles %}
+    <link rel="stylesheet" href="{% static 'css/individual_category.css' %}">
+{% endblock cssfiles %}
+
+{% block content %}
+    <div class="main-box">
+    <!-- blog lists -->
+        <div class="heading">
+            <div class="head-row">
+                <div class="head-col">
+                    <h2>{{category.name}}</h2>
+                </div>
+                <div class="head-col">
+                    <select name="" id="">
+                        <option value="">Latest</option>
+                        <option value="">Most Viewed</option>
+                        <option value="">Most Rated</option>
+                        <option value="">Default</option>
+                    </select>
+                </div>
+                
+                
+            </div>
+        </div>
+
+   
+        <div class="blogrow" id="blrw">
+            {% for blog in blogs %}
+                <div class="blogcolumn-4">
+                    <div class="slider-box">
+            
+                        <div class="slider-img">
+                            <img src="{{blog.thumbnail_image.url}}" alt="">
+                            <div class="overlay">
+                                <p>{{blog.description}}<span><i class="fa fa-heart" aria-hidden="true"></i>{{blog.favourite_count}}</span></p>
+                                
+                            </div>
+                        </div>
+                        <div class="detail-box">
+                            <div class="type">
+                                <p>{{blog.title}}</p>
+                                <a href="{% url 'read-blog' blog.category blog.slug %}" class="readmore-btn">Read blog...</a>
+                    
+                            </div>
+                            <div class="description">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            {% endfor %}             
+        </div>
+        <!-- page button -->
+        <div class="page-btn">
+            <a href=""><i class="fa fa-backward"></i></a>
+            <a href="">1</a>
+            <a href="">2</a>
+            <a href="">3</a>
+            <a href="">...</a>
+            <a href=""><i class="fa fa-forward"></i></a>
+        </div>
+    </div>
+{% endblock content %}

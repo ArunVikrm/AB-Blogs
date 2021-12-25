@@ -1,0 +1,230 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html{
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+
+}
+body{
+    background: linear-gradient(to right,#141E30, #243B55);
+    background: linear-gradient(to right bottom, #20a7bb, #17acc7, #0fb2d3, #0cb7df, #12bceb);
+    background-size: cover;
+    background-repeat: repeat;
+}
+.container{
+    width: 100%;
+    margin-top: 80px;
+}
+.container h3{
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 30px;
+    color: #fff;
+    margin-top: 110px;
+    padding-top: 25px;
+    text-align: center;
+    
+}
+.container .row{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    
+}
+.container .column{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ 
+    margin: 50px 0 0 100px;
+}
+.column form{
+    font-family: 'Poppins';
+}
+.column form label{
+    display: block;
+    font-size: 1.25em;
+    color: #fff;
+    margin: 10px 0 10px 20px;
+
+}
+.column form input{
+    display: block;
+    width: 300px;
+    height: 50px;
+    font-size: 1.0625em;
+    font-family: 'Poppins';
+    padding: 15px;
+    border: 2px solid #000080;
+    margin: 10px 0 10px 50px;
+}
+.column form input:focus{
+    outline: none;
+}
+
+form select{
+   width: 25%;
+    height: 40px;
+   margin: 20px 0 20px 50px;
+   font-family: 'Poppins';
+   outline: none;
+   font-size: 1.0625em;
+   padding-left: 15px;
+
+}
+form select option{
+    font-size: 1.0625em;
+    
+
+}
+
+form #description{
+    display: block;
+   
+    width: 900px;
+    height: 100px;
+    resize: none;
+    outline: none;
+    padding: 20px;
+    font-size: 1.0625em;
+    font-family: 'Poppins';
+    border: 2px solid #000080;
+    margin: 10px 0 10px 50px;
+}
+form #blogcontent{
+    display: block;
+    resize: none;
+    outline: none;
+    padding: 20px;
+    font-size: 1.0625em;
+    font-family: 'Poppins';
+    border: 2px solid #000080;
+    
+    width: 900px;
+    height: 500px;
+    margin: 10px 0 10px 50px;
+
+}
+.btn{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-right:50%;
+}
+#cbtn{
+    width: auto;
+    height: 50px;
+    color: #fff;
+    padding: 10px;
+    font-size: 1.125em;
+    background: #4545f8;
+    border: none;
+    border-radius: 3px;
+   
+    display: inline-block;
+    margin: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+}
+#cbtn:hover{
+    background: #441aff;
+    box-shadow: 5px 5px 1px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+/* media queries */
+@media only screen and (max-width: 450px){
+    .container .row{
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+        
+    }
+    .container .column{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 50px 0 0 0;
+    }
+   
+    .column form label{
+        margin: 10px 0 10px 20px;
+    }
+    .column form input{
+        margin: 10px 0 10px 50px;
+    }
+   
+    .select-div{
+        width: 400px;
+        height: 100px;
+    }
+    form select{
+       width: 50%;
+       height: 40px;
+       margin: 20px 0 0 50px;
+       padding-left: 15px;
+
+    }
+ 
+    
+    form #description{     
+        width: 75%;       
+        height: 100px;
+        margin: 10px 0 0 50px;
+    }
+    form #blogcontent{
+        width: 75%;
+        height: 500px;
+        margin: 10px 0 10px 50px;
+    }
+    .btn{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #cbtn{
+        width: auto;
+        height: 50px;
+        padding: 10px;
+        font-size: 1.125em;
+        margin: 10px;
+    }
+}
+/* media queries */
+@media only screen and (max-width: 1200px) and (min-width: 500px){
+ 
+
+    .container .column{
+        margin: 50px 0 0 100px;
+    }
+    
+    form #description{     
+        max-width: 500px; 
+        min-width: 400px;        
+    }
+    form #blogcontent{
+        max-width: 500px;
+        min-width: 400px;
+    }
+    .btn{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #cbtn{
+        width: auto;
+        height: 50px;
+        padding: 10px;
+        margin: 10px;
+    }
+    #topbtn{
+        margin-right: 50px;
+    }
+}

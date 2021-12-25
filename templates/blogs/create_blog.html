@@ -1,0 +1,61 @@
+{% extends 'standard/main_page.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Home | CreateBlogs @ABblogs</title>
+{% endblock title %}
+
+{% block cssfiles %}
+    <link rel="stylesheet" href="{% static 'css/createblog.css' %}">
+{% endblock cssfiles %}
+
+
+{% block content %}
+    <section class="container">
+        <h3>Create a beautiful blog of your choice</h3>
+        <div class="row">
+        
+            <div class="column">
+            
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <label for="blogtitle">Blog Title:</label>
+                    {{blog_form.title}}
+
+                    <label for="blogimage">Blog Thumbnail Image:</label>
+                    {{blog_form.thumbnail_image}}  
+                
+                    <label for="description">Description:</label>
+                    <!-- <textarea name="description" id="description" cols="40" rows="10" minlength="20" maxlength="200" placeholder="A short description about your blog in less than 200characters"></textarea> -->
+                    {{blog_form.description}}
+
+                    <label for="categories">Select a category:</label>
+                    {{blog_form.category}}
+                    
+                    <label for="blogcontent">Main content:</label>
+                    <textarea name="blogcontent" id="blogcontent" placeholder="Main content goes here"></textarea>
+                    {{blog_form.media}} 
+                    <!-- {{blog_form.body}} -->
+
+                    <button id="cbtn" type="submit" >Post</button>
+
+                </form>
+                
+            </div>
+        
+
+        
+        </div>
+            
+        <div class="btn">
+            <button id="cbtn">Save changes</button>
+            
+        </div>
+    
+
+    </section>
+
+    <script type="text/javascript">   
+        CKEDITOR.replace('blogcontent');    
+    </script>
+{% endblock content %}

@@ -1,0 +1,24 @@
+{% load static %}
+
+<div class="foot" id="foot">
+    <h1 class="title" style="color: white;">திருக்குறள்</h1>
+    <div class="rowfooter">
+        <div class="columnfooter">
+            <img src="{% static 'images/thiruvalluvar.png' %}" alt="tiruvalluvar" class="animate__animated animate__bounce">
+        </div>
+        <div class="columnfooter animate__animated animate__bounce">
+            <h3 style="color: #ff532b;">{{kural.adikaram_name}}</h3>
+            <br>
+            <br>
+            <h4 style="color: #ff532b;">குறள்:</h4>
+            <h2 style="color: white;"><pre>{{kural.Line1}}
+{{kural.Line2}}</pre>
+            </h2>
+            <h4 style="color: #ff532b;">குறள் விளக்கம்:</h4>
+            <p style="color: white;">
+                {{kural.Explanation}}
+            </p>
+            <h3 style="color: #ff532b; text-align:center;"> - திருவள்ளுவர்</h3>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+{% extends 'standard/main_page.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Home | ReadBlogs @ABblogs</title>
+{% endblock title %}
+
+{% block cssfiles %}
+    <link rel="stylesheet" href="{% static 'css/individual_blog.css' %}">
+{% endblock cssfiles %}
+
+{% block content %}
+    <section class="container">
+        <div class="heading">
+            <div class="headcontent">
+                <h1>{{blog.title}}</h1>
+                <h2>{{blog.description}}</h2>
+                <div class="profile">
+                <img src="{{blog.author.profileimageURL}}" alt=""><a href="{% url 'dashboard' blog.author.id %}"><span>{{blog.author.username}}</span></a>
+                    {% if request.user != blog.author %}
+                        {% if follow_status == True %}
+                            <button data-profile="{{blog.author.id}}" data-action="unfollow" class="followbtn process-follow" >UnFollow</button>
+                        {% else %}
+                            <button data-profile="{{blog.author.id}}" data-action="follow" class="followbtn process-follow" >Follow</button>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            
+                <div class="small-info">
+                    <span><i class="fa fa-bookmark-o"></i></span>
+                    <h3>{{blog.date_posted}}</h3>
+                    <h3>5min read</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+    <article class="blogcontent">
+            <span class="main-article">
+                {{blog.body | safe}}
+            </span>
+    </article>
+    <!-- blog review -->
+    <div class="like-comment">
+        <span><i class="fa fa-comments" style="color: #243B55;"></i>256</span>
+        <span><i data-blog="{{blog.id}}" id="process-like" class="fa fa-heart" style="color: crimson;"></i>{{favourite_count}}</span>
+        <span class="save"><i class="fa fa-bookmark-o"></i>Save for later</span>
+    
+    </div>
+    <!-- user -->
+    <div class="lower-info">
+        <h3>written by</h3>
+        <img src="{{blog.author.profileimageURL}}" alt=""><a href="{% url 'dashboard' blog.author.id %}"><span>{{blog.author.username}}</span></a>  
+        {% if request.user != blog.author %}
+            {% if follow_status == True %}
+                <button data-profile="{{blog.author.id}}" data-action="unfollow" class="followbtn lower process-follow" >UnFollow</button>
+            {% else %}
+                <button data-profile="{{blog.author.id}}" data-action="follow" class="followbtn lower process-follow" >Follow</button>
+            {% endif %}
+        {% endif %}
+        
+    </div>
+    <script type="text/javascript" src="{% static 'js/follow.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/like.js' %}"></script>
+{% endblock content %}

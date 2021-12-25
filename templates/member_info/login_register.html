@@ -1,0 +1,68 @@
+{% extends 'standard/main_page.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Login | @ABblogs</title>
+{% endblock title %}
+
+{% block cssfiles %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock cssfiles %}
+
+{% block content %}
+    <div class="login-page">
+        <div class="login-container">
+            <div class="login-row">
+                
+                <div class="login-column">
+                    <div class="box">
+                        <div class="form-btn">
+                            <span onclick="login()">Login</span>
+                            <span onclick="signup()">Sign up</span>
+                            <hr id="hr-line">
+                        </div>
+
+                        
+                        <form action="" id="loginform" method="POST">
+                            {% csrf_token %}
+                            <input type="text" placeholder="Email id" name="email">
+                            <input type="password" placeholder="Password" name="password">
+                            <button type="submit" class="button" name="submit" value="login">Login</button>
+                            <a href="">Forgot password?</a>
+                        </form>
+
+                        
+                        <form action="" id="signupform" method="POST">
+                            {% csrf_token %}
+                            <input type="text" placeholder="Username" name="username">
+                            <input type="email" placeholder="Email id" name="email">
+                            <input type="password" placeholder="Password" name="password1">
+                            <input type="password" placeholder="Confirm Password" name="password2">
+                            <button type="submit" class="button" name="submit" value="signup">Signup</button>
+                        </form>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        var loginform = document.getElementById("loginform");
+        var signupform = document.getElementById("signupform");
+        var hrline = document.getElementById("hr-line");
+
+        function login(){
+            loginform.style.transform = "translateX(300px)";
+            signupform.style.transform = "translateX(300px)";
+            hrline.style.transform = "translateX(0)";
+        }
+        function signup(){
+            loginform.style.transform = "translateX(0)";
+            signupform.style.transform = "translateX(0)";
+            hrline.style.transform = "translateX(100px)";
+        }
+    </script>
+{% endblock content %}

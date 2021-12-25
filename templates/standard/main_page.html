@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% block title %}
+    {% endblock title %}
+
+    <link rel="shortcut icon" href="{% static 'images/ninja.ico' %}">
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;700&display=swap" 
+    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+
+    <!-- font awesome icons -->
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- animate.css -->
+       
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!-- nav bar css-->
+    <link rel="stylesheet" href="{% static 'css/nav_bar.css' %}">
+
+    {% block cssfiles %}
+    {% endblock cssfiles %}
+
+    <script type="text/javascript">
+        var user = '{{request.user}}'
+  
+        function getToken(name) {
+              var cookieValue = null;
+              if (document.cookie && document.cookie !== '') {
+                  var cookies = document.cookie.split(';');
+                  for (var i = 0; i < cookies.length; i++) {
+                      var cookie = cookies[i].trim();
+                      // Does this cookie string begin with the name we want?
+                      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                          break;
+                      }
+                  }
+              }
+              return cookieValue;
+            }
+            var csrftoken = getToken('csrftoken')
+      </script>
+
+</head>
+<body>
+    <div class="all">
+        <div class="head" id="head">
+            <div class="navibar">
+                <div class="logo">
+                    <a href="{% url 'landing-page' %}">
+                        <img src="{% static 'images/logo_text_blue.png' %}" alt="">
+                    </a>
+                </div>
+                <div class="explore">
+                    <button class="button"><span>Explore   <i class="fa fa-angle-double-down"></i></span></button>
+                    <div id="explore-content" class="explore-content">
+                        {% for category_name in category_list %}
+                            <a href="{% url 'ind-category' category_name.name %}">{{category_name.name}}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- search button -->
+                <div class="search-box">
+                    <input type="text" placeholder="Type to Search Blogs">
+                    <div class="searchbtn">
+                        <i class="fa fa-search"></i>
+                    </div>
+                    <div class="cancelbtn">
+                        <i class="fa fa-times"></i>
+                    </div>
+                </div>
+
+                <nav>
+                    <ul id="navitems">
+                        <li><a href="">Home</a></li>
+                        <li><a href="">Blogs</a></li>
+                        <li><a href="">About</a></li>                        
+                        {% if not request.user.is_authenticated %}
+                            <li><a href="{% url 'register' %}"><button class="button">Register</button></a></li>
+                        {% else %}
+                            <li><i id="user" class="fa fa-user"><span>{{request.user}}</span></i></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                
+                <i id="menubar" class="fa fa-bars"></i>
+            </div>
+            <a href="" id="topbtn" onclick = "topBtn()"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+            <a href="" id="downbtn" onclick = "downBtn()"><i class="fa fa-arrow-down" aria-hidden="true"></i></a>
+
+        </div>
+
+        {% if request.user.is_authenticated %}
+            <div class="userprofile">
+                <div class="usermenu" id="us">
+                    <h3>Content Creator</h3>
+                    <ul>
+                        <li><img src="{{user.profileimageURL}}" alt="" width="25px" height="25px"><a href="{% url 'dashboard' user.id%}">My Profile</a></li>
+                        <li><img src="{% static 'images/settings.png' %}" alt="" width="25px" height="25px"><a href="">Settings</a></li>
+                        <li><img src="{% static 'images/log-out.png' %}" alt="" width="25px" height="25px"><a href="{% url 'logout' %}">Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+        {% endif %}    
+        
+        {% block content %}
+        {% endblock content %}
+
+    </div>
+
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

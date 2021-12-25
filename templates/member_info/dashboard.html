@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Dashboard-ABblogs</title>
+        
+        <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,200&display=swap" rel="stylesheet">
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+        <script type="text/javascript">
+            var user = '{{request.user}}'
+      
+            function getToken(name) {
+                  var cookieValue = null;
+                  if (document.cookie && document.cookie !== '') {
+                      var cookies = document.cookie.split(';');
+                      for (var i = 0; i < cookies.length; i++) {
+                          var cookie = cookies[i].trim();
+                          // Does this cookie string begin with the name we want?
+                          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                              break;
+                          }
+                      }
+                  }
+                  return cookieValue;
+                }
+                var csrftoken = getToken('csrftoken')
+          </script>
+    </head>
+    <body>
+        <div class="usercontent">
+            <div class="userdata">
+                <div class="acard">
+                    <div class="card">
+                        <div class="details">
+                            <img src="{{user.profileimageURL}}" alt="">
+                            <h2>{{user.username}}</h2>
+                            
+                        </div>
+                        <div class="other">
+                            <h4>Captain Jack Sparrow is a fictional character and the main protagonist of the Pirates of the Caribbean film series.</h4>
+                            <a href="mailto:jacksparrow@gmail.com"><p>{{user.email}}</p></a> 
+                            
+                            {% if request.user != user %}
+                                {% if follow_status == True %}
+                                    <button data-profile="{{user.id}}" data-action="unfollow" id="followbtn" class="process-follow" >UnFollow</button>
+                                {% else %}
+                                    <button data-profile="{{user.id}}" data-action="follow" id="followbtn" class="process-follow">Follow</button>
+                                {% endif %}
+                            {% else %}
+                                <a href="{% url 'edit-profile' user.id%}" id="followbtn">Edit</a>
+                            {% endif %}
+                        </div>
+                        
+                    </div>
+            
+                    <div class="card">
+                        <div class="follow">
+                            <p>Followers</p><span>{{followers_count}}</span>
+                            <p>Following</p><span>{{following_count}}</span>
+                        </div>
+                    </div>
+        
+                    <div class="card">
+                        <div class="other">
+                            <i class="fa fa-heart" aria-hidden="true" style="color: crimson;"><span>Liked</span></i>
+                            <span>{{favourite_count}}</span>
+                            <i class="fa fa-pencil" aria-hidden="true" style="color: purple"><span>Created</span></i>
+                            <span>{{blog_count}}</span>
+                            <i class="fa fa-bookmark" aria-hidden="true" style="color: #751aff;"><span>Saved</span></i>
+                            <span>8</span>
+                        </div>
+                    </div>
+                </div>           
+            </div>
+            
+        
+            {% if request.user.is_authenticated %}
+                <div class="sidebar">
+                    <div class="logocontent">
+                        <div class="logo">
+            
+                            <div class="logoname">{{request.user.username}}</div>
+                        </div>
+                        <i class='bx bx-menu-alt-left' id="sidebtn"></i>
+                    </div>
+                    
+                    <ul class="sidelist">
+                        <li>
+                            <a href="{% url 'landing-page' %}">
+                                <i class='bx bxs-home'></i>
+                                <span class="listname">Home</span>
+                            </a>
+                            <span class="tooltip">Home</span> 
+                        </li>
+                        <li>
+                            <a href="{% url 'dashboard' request.user.id%}" id="dash">
+                                <i class='bx bx-grid-alt'></i>
+                                <span class="listname">Dashboard</span>
+                            </a>
+                            <span class="tooltip">Dashboard</span> 
+                        </li>
+                        <li>
+                            <a href="{% url 'edit-profile' request.user.id%}" id="prof">
+                                <i class='bx bx-user'></i>
+                                <span class="listname">My Profile</span>
+                            </a>
+                            <span class="tooltip">Profile</span> 
+                        </li>
+                    
+                        <li>
+                            <a href="#">
+                                <i class='bx bx-bookmark'></i>
+                                <span class="listname">Saved Blogs</span>
+                            </a>
+                            <span class="tooltip">Saved Blogs</span> 
+                        </li>
+                        <li>
+                            <a href="{% url 'logout' %}">
+                                <i class='bx bx-log-out'></i>
+                                <span class="listname">Log out</span>
+                            </a>
+                            <span class="tooltip">Log out</span> 
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+                
+        </div>
+
+
+        <script>
+            var sbtn = document.querySelector('#sidebtn');
+            var sbar = document.querySelector('.sidebar');
+            sbtn.onclick = function(){
+                sbar.classList.toggle('active');
+            }
+            var use = document.querySelector('.userdata');
+            var dashbtn = document.querySelector('#dash');
+            dashbtn.onclick = function(){
+                use.classList.toggle('active');
+            }
+        </script>
+
+        <script type="text/javascript" src="{% static 'js/follow.js' %}"></script>
+     
+    </body>
+    </html>
